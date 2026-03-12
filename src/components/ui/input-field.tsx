@@ -5,6 +5,8 @@ type InputFieldProps = {
   name: string;
   placeholder?: string;
   type?: "text" | "number" | "email" | "password";
+  value?: string | number | readonly string[] | undefined;
+  onChange?: (value: string) => void;
 };
 
 const InputField = ({
@@ -12,6 +14,8 @@ const InputField = ({
   name,
   placeholder,
   type = "text",
+  value,
+  onChange,
 }: InputFieldProps): React.ReactElement => {
   return (
     <div className="space-y-2">
@@ -26,6 +30,10 @@ const InputField = ({
         name={name}
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => {
+          onChange?.(e.target.value);
+        }}
       />
     </div>
   );

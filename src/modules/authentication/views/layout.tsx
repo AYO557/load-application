@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router";
+import { Toaster } from "sonner";
 
 const AuthLayout = (): React.ReactElement => {
   return (
@@ -8,6 +9,8 @@ const AuthLayout = (): React.ReactElement => {
 
       <div className="h-full w-full md:w-[50%] lg:w-[40%] bg-black text-white flex justify-center items-center">
         <main className="p-2 md:p-4 lg:p-8 w-full max-w-125 space-y-8">
+          <Toaster position="top-right" />
+
           <Outlet />
         </main>
       </div>
