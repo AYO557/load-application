@@ -3,6 +3,7 @@ import SignUpForm from "../forms/sign-up";
 import Button from "../../../components/ui/button";
 import AuthHeader from "../components/auth-header";
 import FormDivider from "../components/form-divider";
+import { Link } from "react-router";
 
 const SignUpPage = () => {
   return (
@@ -32,7 +33,9 @@ const SignUpPage = () => {
 
       <p className="text-center">
         Already have an account?{" "}
-        <span className="hover:underline cursor-pointer">Sign In</span>
+        <Link to="/auth/signin" className="hover:underline cursor-pointer">
+          Sign In
+        </Link>
       </p>
     </>
   );

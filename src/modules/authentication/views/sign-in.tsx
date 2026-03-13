@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import { GithubLogoIcon, GoogleLogoIcon } from "@phosphor-icons/react";
 import LogInForm from "../forms/sign-in";
 import Button from "../../../components/ui/button";
@@ -31,7 +33,9 @@ const SignInPage = () => {
 
       <p className="text-center">
         Don't have an account?{" "}
-        <span className="hover:underline cursor-pointer">Sign Up</span>
+        <Link to="/auth/signup" className="hover:underline cursor-pointer">
+          Sign Up
+        </Link>
       </p>
     </>
   );
