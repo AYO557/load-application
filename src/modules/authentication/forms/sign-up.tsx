@@ -4,6 +4,7 @@ import Button from "../../../components/ui/button";
 import type { SignUpFormData } from "../libs/types";
 import { validateSignUpFields } from "../utils/validations";
 import { toast } from "sonner";
+import AuthService from "../infrastructure/services/auth.service";
 
 const SignUpForm = (): React.ReactElement => {
   const [signupFormData, setSignupFormData] = React.useState<SignUpFormData>({
@@ -22,7 +23,20 @@ const SignUpForm = (): React.ReactElement => {
       toast.error(error);
     }
 
-    if (!isError) toast.success("Sign Up Successful!");
+    if (!isError) {
+      AuthService.registerUser({
+        email: signupFormData.email,
+        fullName: `${signupFormData.firstName} ${signupFormData.lastName}`,
+        password: signupFormData.password,
+        role: "Client",
+      })
+        .then(() => {
+          toast.success("Sign Up Successful!");
+        })
+        .catch((err) => {
+          toast.error("Sorry an error occured!");
+        });
+    }
   };
 
   return (
