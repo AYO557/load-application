@@ -10,10 +10,41 @@ const SignInForm = (): React.ReactElement => {
     password: "",
   });
 
+  const baseUrl = "https://localhost:7118/api";
+
+  // common methods: GET | POST | PUT | PATCH | DELETE
+
   const handleSignIn = (e: React.SubmitEvent) => {
     e.preventDefault();
 
-    toast.success("Sign In Successful!");
+    const logUserIn = async () => {
+      try {
+        const logUserRes = await fetch(`${baseUrl}/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signinFormData),
+        });
+
+        const dto = await logUserRes.json(); // parse
+
+        if (!logUserRes.ok || logUserRes.status > 399) {
+          throw dto;
+        }
+
+        console.log("succes response: ", dto);
+
+        toast.success("Login Successful!");
+      } catch (error) {
+        console.error(error);
+        toast.error(
+          (error as { message: string }).message || "Sorry, an error occured.",
+        );
+      }
+    };
+
+    logUserIn();
   };
 
   return (
